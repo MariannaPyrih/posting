@@ -1,8 +1,4 @@
-from django.contrib import admin
-from .models import Article
 
-# Register your models here.
-admin.site.register(Article)
 
 # -*- coding: utf-8 -*-
 
@@ -18,6 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (('', {'fields': ('category',),
                 }),
     )
+
 admin.site.register(Category, CategoryAdmin)
 
 
@@ -54,3 +51,4 @@ class ArticleAdmin(admin.ModelAdmin):
         return obj.delete()
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.unregister(Article)

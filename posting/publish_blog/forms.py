@@ -2,15 +2,14 @@
 
 from django import forms
 
-from .models import ArticleImage
+from publish_blog.models import ArticleImage
 
 
 class ArticleImageForm(forms.ModelForm):
     image = forms.ImageField(
-        widget=forms.ClearableFileInput(attrs={
-
-'multiple': True}))
+        widget=forms.ClearableFileInput(attrs={'multiple':
+True}))
 
 class Meta:
-        model = ArticleImage
-        fields = '__all__'
+    model = ArticleImage
+    fields = '__all__'

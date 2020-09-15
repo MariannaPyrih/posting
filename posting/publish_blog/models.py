@@ -5,14 +5,17 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    category = models.CharField(u'Категорія', max_length = 250, help_text = u'Максимум 250 символів')
+    category = models.CharField(u'Категорія',
+       max_length=250, help_text=u'Максимум 250 символів')
+    slug = models.SlugField(u'Слаг')
+
 
 class Meta:
-        verbose_name = u'Категорія для новини'
-        verbose_name_plural = u'Категорії для новин'
+    verbose_name = u'Категорія для публікації'
+    verbose_name_plural = u'Категорії для публікацій'
 
 def __str__(self):
-            return self.category
+    return self.category
 
 class Article(models.Model):
     title = models.CharField(u'Заголовок', max_length = 250, help_text = u'Максимум 250 символів')
@@ -20,14 +23,11 @@ class Article(models.Model):
     pub_date = models.DateTimeField(u'Дата публікації', default = timezone.now)
     slug = models.SlugField(u'Слаг', unique_for_date ='pub_date')
 
-    main_page = models.BooleanField(u'Головна', default = False, help_text = u'Показувати')
+    main_page = models.BooleanField(u'Головна', default = False,
+                                    help_text = u'Показувати на головній сторінці')
     category = models.ForeignKey(Category,
-                                  related_name='news',
-                                  blank = True,
-                                  null = True,
-                                  verbose_name = u'Категорія',
-                                  on_delete = models.CASCADE)
-    objects = models.Manager()
+                                    related_name='articles', blank=True, null=True,
+                                    verbose_name=u'Категорія',on_delete=models.CASCADE)
 
 class Meta:
         ordering = ['-pub_date']
