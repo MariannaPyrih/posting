@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from django.views.generic import TemplateView, ListView, DateDetailView
 from .models import Article
 from .models import Category
